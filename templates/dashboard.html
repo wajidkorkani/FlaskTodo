@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block head %}
+<style>
+  .containerDiv{
+    width: 1000px;
+    min-height: 60px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .box{
+    width: 100%;
+    height: 100%;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: white;
+    color: #0F172A;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  h1{
+    font-size: 40px;
+    color: #0F172A;
+    text-align: center;
+  }
+  p{
+    font-size: 25px;
+    text-align: center;
+    color: #0F172A;
+  }
+
+  form{
+    margin: 0 auto;
+    width: 600px;
+    background-color: var(--surface);
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  input, button{
+    width: 100%;
+    height: 50px;
+    font-size: 40px;
+    gap: 5px;
+    text-align: center;
+    background-color: white;
+    color: #0F172A;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+  }
+  button:hover{
+    background-color: #0F172A;
+    color: white;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-card">
+  <h2>Hello, {{ user.username }}!</h2>
+  <h1>Mr {{ user.name }}</h1>
+  <p style="color: var(--muted); font-size: 0.9375rem; margin-top: 0.375rem;">
+    Your session is active and everything looks good.
+  </p>
+  <div class="badge">Session active</div>
+</div>
+
+{% endblock %}
+
+{% block form %}
+  <br><br>
+  <br><br>
+  <div class="containerDiv">
+    {% for toDo in toDoList%}
+    <div class="box">
+      <h1>{{ toDo.name }}</h1>
+      <p>Time: {{ toDo.dateTime }}</p>
+      <p><b>Created on:</b>{{ toDo.created }}</p>
+    </div>
+    {% endfor %}
+  </div>
+  <br><br><br><br>
+
+<br><br>
+  <form action="/create-todo" method="POST">
+    <input type="text" name="name" placeholder="Enter your name">
+    <br><br>
+    <input type="datetime-local" name="dateTime">
+    <br><br>
+    <button>Submit</button>
+  </form>
+  <br><br><br><br>
+{% endblock %}
